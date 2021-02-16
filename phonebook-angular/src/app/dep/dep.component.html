@@ -1,0 +1,53 @@
+<div class="container">
+  <table style="width:100%">
+    <tr class="alert alert-primary">
+      <td>Id</td>
+      <td>Наименование отдела</td>
+      <td>Филиал</td>
+      <td>Организация</td>
+    </tr>
+    <tr class="alert alert-info" *ngFor="let dep of deps">
+      <td>{{dep.id}}</td>
+      <td>{{dep.depName}}</td>
+      <ng-container *ngIf="dep.plainFilialBranchDto; else noFilialName">
+        <td>{{dep.plainFilialBranchDto.filialName}}</td>
+      </ng-container>
+      <ng-template #noFilialName>
+        <td></td>
+      </ng-template>
+      <ng-container *ngIf="dep.plainOrgDto; else noOrgName">
+        <td>{{dep.plainOrgDto.nameOrg}}</td>
+      </ng-container>
+      <ng-template #noOrgName>
+        <td></td>
+      </ng-template>
+    </tr>
+  </table>
+<br>
+<div class="box">
+  <label for="nameDep">Наименование отдела</label>
+  <input id="nameDep" class="form-control" name="nameDep" [(ngModel)]="dep.depName" placeholder="Наименование"/>
+  <br>
+  <button type="button" name="buttonAddDep" onClick="history.go(0);" (click)="setNewDepartment(dep)">Добавить отдел</button>
+  <button type="button" name="buttonFindDepByName" (click)="findDepartmentByNameDep(dep.depName)">Поиск по наименованию</button>
+  <button type="button" name="buttonFindAll" (click)="getDepsTbl()">Все отделы</button>
+  <br>
+  <label for="idUpdate">Идентификатор для изменения/удаления</label>
+  <input id="idUpdate" class="form-control" name="idUpdate" [(ngModel)]="id" placeholder="Идентификатор"/>
+  <br>
+  <button type="button" name="buttonUpdateDep" onClick="history.go(0);" (click)="updateDepartment(id, dep)">Обновить отдел</button>
+  <button type="button" name="buttonRemoveDep" onClick="history.go(0);" (click)="removeDepartment(id)">Удалить отдел</button>
+  <br>
+  <label for="nameDep">ИД организации для добавления</label>
+  <input type="number" id="idOrg" class="form-control" name="idOrg" [(ngModel)]="idOrg" placeholder="ИД организации"/>
+  <br>
+  <button type="button" name="buttonAddDepToOrg" onClick="history.go(0);" (click)="setOrgToDepartment(idOrg, id, dep)">Добавить отдел в организацию</button>
+  <button type="button" name="buttonRemoveDepFromOrg" onClick="history.go(0);" (click)="removeOrgFromDepartment(idOrg, id)">Удалить отдел у организации</button>
+  <br>
+  <label for="nameDep">ИД филиала для добавления</label>
+  <input type="number" id="idFil" class="form-control" name="idFil" [(ngModel)]="idFil" placeholder="ИД филиала"/>
+  <br>
+  <button type="button" name="buttonAddDepToFil" (click)="setFilToDepartment(idFil, id, dep)">Добавить отдел в филиал</button>
+  <button type="button" name="buttonRemoveDepFromFil" onClick="history.go(0);" (click)="removeFilFromDepartment(idFil, id)">Удалить отдел у филиала</button>
+</div>
+</div>

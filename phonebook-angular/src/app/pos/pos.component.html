@@ -1,0 +1,47 @@
+<div class="container">
+  <table style="width:100%">
+    <tr class="alert alert-primary">
+      <td>Id</td>
+      <td>Наименование должности</td>
+      <td>Заработная плата</td>
+      <td>Количество сотрудников</td>
+      <td>Сотрудники</td>
+    </tr>
+    <tr class="alert alert-info" *ngFor="let pos of poss">
+      <td>{{pos.id}}</td>
+      <td>{{pos.namePosition}}</td>
+      <td>{{pos.salary}}</td>
+      <td>{{pos.plainEmployeesDto.length}}</td>
+      <td>
+        <div *ngFor="let empl of pos.plainEmployeesDto">
+          {{pos.plainEmployeesDto.indexOf(empl)+1}}. {{empl.fio}};<br>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <div class="box">
+    <label for="namePos">Наименование должности</label>
+    <input id="namePos" class="form-control" name="namePos" [(ngModel)]="pos.namePosition" placeholder="Наименование"/>
+    <br>
+    <label for="salaryPos">Заработная плата</label>
+    <input id="salaryPos" type="number" step="0.01" class="form-control" name="salaryPos" [(ngModel)]="pos.salary" placeholder="Заработная плата"/>
+    <br>
+    <button type="button" name="buttonFindPosByName" (click)="findPosByName(pos.namePosition)">Поиск по наименованию</button>
+    <button type="button" name="buttonFindAll" (click)="getPossTbl()">Все должности</button>
+    <br>
+    <label for="idUpdate">Идентификатор для изменения/удаления</label>
+    <input type="number" id="idUpdate" class="form-control" name="idUpdate" [(ngModel)]="id" placeholder="Идентификатор"/>
+    <br>
+    <button type="button" name="buttonAddPos" onClick="history.go(0);" (click)="setNewPosition(pos)">Добавить должность</button>
+    <button type="button" name="buttonUpdatePos" onClick="history.go(0);" (click)="updatePosition(id, pos)">Обновить должность</button>
+    <button type="button" name="buttonRemovePos" onClick="history.go(0);" (click)="removePosition(id)">Удалить должность</button>
+    <br>
+    <br>
+    <label for="idEmp">Идентификатор для добавления сотрудника</label>
+    <input type="number" id="idEmp" class="form-control" name="idEmp" [(ngModel)]="idEmp" placeholder="Идентификатор"/>
+    <br>
+    <button type="button" name="buttonAddEmpToPos" onClick="history.go(0);" (click)="setEmpToPosition(idEmp, id, pos)">Добавить должность сотруднику</button>
+    <button type="button" name="buttonRemoveEmpFromPos" onClick="history.go(0);" (click)="removeEmpFromPosition(idEmp, id)">Удалить должность у сотрудника</button>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+  <table style="width:100%">
+    <tr class="alert alert-primary">
+      <td>Id</td>
+      <td>Наименование филиала</td>
+      <td>Адрес филиала</td>
+      <td>Организация</td>
+    </tr>
+    <tr class="alert alert-info" *ngFor="let fil of fils">
+      <td>{{fil.id}}</td>
+      <td>{{fil.filialName}}</td>
+      <td>{{fil.address}}</td>
+      <ng-container *ngIf="fil.plainOrgDto; else noOrgName">
+        <td>{{fil.plainOrgDto.nameOrg}}</td>
+      </ng-container>
+      <ng-template #noOrgName>
+        <td></td>
+      </ng-template>
+    </tr>
+  </table>
+  <br>
+  <div class="box">
+    <label for="nameFil">Наименование филиала</label>
+    <input id="nameFil" class="form-control" name="nameFil" [(ngModel)]="fil.filialName" placeholder="Наименование"/>
+    <br>
+    <label for="addressFil">Адрес филиала</label>
+    <input id="addressFil" class="form-control" name="addressFil" [(ngModel)]="fil.address" placeholder="Адрес филиала"/>
+    <br>
+    <button type="button" name="buttonFindDepByName" (click)="findFilialByNameFil(fil.filialName)">Поиск по наименованию</button>
+    <button type="button" name="buttonFindAll" (click)="getFilsTbl()">Все филиалы</button>
+    <br>
+    <label for="idUpdate">Идентификатор для изменения/удаления</label>
+    <input type="number" id="idUpdate" class="form-control" name="idUpdate" [(ngModel)]="id" placeholder="Идентификатор"/>
+    <br>
+    <button type="button" name="buttonAddFil" onClick="history.go(0);" (click)="setNewFilial(fil)">Добавить филиал</button>
+    <button type="button" name="buttonUpdateFil" onClick="history.go(0);" (click)="updateFilial(id, fil)">Обновить филиал</button>
+    <button type="button" name="buttonRemoveFil" onClick="history.go(0);" (click)="removeFilial(id)">Удалить филиал</button>
+    <br>
+    <label for="nameDep">ИД организации для добавления</label>
+    <input type="number" id="idOrg" class="form-control" name="idOrg" [(ngModel)]="idOrg" placeholder="ИД организации"/>
+    <br>
+    <button type="button" name="buttonAddDepToOrg" onClick="history.go(0);" (click)="setOrgToFilial(idOrg, id, fil)">Добавить филиал в организацию</button>
+    <button type="button" name="buttonRemoveDepFromOrg" onClick="history.go(0);" (click)="removeOrgFromFilial(idOrg, id)">Удалить филиал из организации</button>
+  </div>
+</div>

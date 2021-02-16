@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width:100%">
+  <tr class="alert alert-primary">
+    <td>Id</td>
+    <td>Наименование организации</td>
+    <td>ФИО директора</td>
+    <td>ИНН организации</td>
+    <td>КПП организации</td>
+    <td>Адрес</td>
+  </tr>
+  <tr class="alert alert-info" *ngFor="let org of orgs">
+    <td>{{org.id}}</td>
+    <td>{{org.nameOrg}}</td>
+    <td>{{org.directorName}}</td>
+    <td>{{org.inn}}</td>
+    <td>{{org.kpp}}</td>
+    <td>{{org.address}}</td>
+  </tr>
+</table>
+<br>
+<div class="box">
+    <label for="nameOrg">Наименование организации</label>
+    <input id="nameOrg" class="form-control" name="nameOrg" [(ngModel)]="org.nameOrg" placeholder="Наименование"/>
+    <br>
+    <label for="directorName">ФИО директора</label>
+    <input id="directorName" class="form-control" name="directorName" [(ngModel)]="org.directorName" placeholder="ФИО"/>
+    <br>
+    <label for="inn">ИНН</label>
+    <input type="number" id="inn" class="form-control" name="inn" [(ngModel)]="org.inn" placeholder="ИНН"/>
+    <br>
+    <label for="kpp">КПП</label>
+    <input type="number" id="kpp" class="form-control" name="kpp" [(ngModel)]="org.kpp" placeholder="КПП"/>
+    <br>
+    <label for="address">Адрес</label>
+    <input id="address" class="form-control" name="address" [(ngModel)]="org.address" placeholder="Адрес"/>
+    <br>
+    <button type="button" name="buttonAddOrg" onClick="history.go(0);" (click)="setNewOrganization(org)">Добавить организацию</button>
+    <button class="find" type="button" name="buttonFindByName" (click)="findOrganizationByNameOrg(org.nameOrg)">Поиск по наименованию</button>
+    <button type="button" name="buttonFindByInn" (click)="findOrganizationByInn(org.inn)">Поиск по ИНН</button>
+    <button type="button" name="buttonFindByInn" (click)="getOrgsTbl()">Все организации</button>
+    <br>
+    <label for="idUpdate">Идентификатор для изменения/удаления</label>
+    <input id="idUpdate" class="form-control" name="idUpdate" [(ngModel)]="id" placeholder="Идентификатор"/>
+    <br>
+    <button type="button" name="buttonUpdateOrg" onClick="history.go(0);" (click)="updateOrganization(id, org)">Изменить организацию</button>
+    <button type="button" name="buttonDeleteOrg" onClick="history.go(0);" (click)="removeOrganization(id)">Удалить организацию</button>
+</div>

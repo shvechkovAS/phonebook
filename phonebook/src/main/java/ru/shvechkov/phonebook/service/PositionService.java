@@ -63,8 +63,11 @@ public class PositionService {
     public Position addEmployeeToPosition(Long positionId, Long employeeId){
         Position position = getPosition(positionId);
         Employee employee = employeeService.getEmployee(employeeId);
+        List<Employee> emps = position.getEmployees();
+        if(!emps.contains(employee)){
         position.addEmployee(employee);
         employee.addPositions(position);
+        }
         return position;
     }
 

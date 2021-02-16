@@ -27,10 +27,10 @@ public class Employee {
     private String email;
     private Gender gender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Department department;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Organization organization;
 
     @ManyToMany

@@ -22,7 +22,7 @@ public class FilialBranch {
     @ManyToOne
     private Organization organization;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "filial_branch_id")
     private List<Department> departments = new ArrayList<>();
 

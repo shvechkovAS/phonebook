@@ -62,16 +62,17 @@ public class PositionController {
     }
 
     @PostMapping(value = "{positionId}/employees/{employeeId}/add")
-    public ResponseEntity<PositionDto> addPositionToEmployee(@PathVariable final Long employeeId,
-                                                             @PathVariable final Long positionId,
+    public ResponseEntity<PositionDto> addPositionToEmployee(@PathVariable final Long positionId,
+                                                             @PathVariable final Long employeeId,
                                                              @RequestBody final EmployeeDto employeeDto){
         Position position = positionService.addEmployeeToPosition(positionId, employeeId);
         return new ResponseEntity<>(PositionDto.fromEntity(position), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "{employeeId}/employees/{positionId}/remove")
-    public ResponseEntity<PositionDto> removePositionFromEmployee(@PathVariable final Long employeeId,
-                                                                  @PathVariable final Long positionId){
+    @DeleteMapping(value = "{positionId}/employees/{employeeId}/remove")
+    public ResponseEntity<PositionDto> removePositionFromEmployee(@PathVariable final Long positionId,
+                                                                  @PathVariable final Long employeeId
+                                                                  ){
         Position position = positionService.removeEmployeeFromPosition(positionId, employeeId);
         return new ResponseEntity<>(PositionDto.fromEntity(position), HttpStatus.OK);
     }
